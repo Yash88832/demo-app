@@ -7,8 +7,24 @@
 
 <p>
   <strong>User:</strong>
-  <%= @blog.user_id %>
+  <%= current_user.email %>
 </p>
+
+<strong>Comment:</strong>
+
+<ul>
+  <% if @blog.comments.present? %>
+    <% @blog.comments.each do |comment| %>
+      <li> <%= comment.comment_box %> </li>
+    <% end %>
+  <% elsif %>
+    <li> No Comments</li>
+  <% end %>
+</ul>
+
+<div class="field">
+  <%= link_to 'Add Comment', new_comment_path(blog_id: @blog.id),  class: 'btn btn-outline-info' %>
+</div>
 
 <%= link_to 'Edit', edit_blog_path(@blog) %> |
 <%= link_to 'Back', blogs_path %>
